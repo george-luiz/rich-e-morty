@@ -1,0 +1,12 @@
+.footer {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    font-size: 20px;
+    line-height: 15px;
+}
