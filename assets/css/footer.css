@@ -1,12 +1,24 @@
 .footer {
     height: 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
 .footer p {
     font-size: 20px;
     line-height: 15px;
+}
+
+.footer button {
+    background-color: transparent;
+    border: none;
+}
+
+.footer button i {
+    font-size: 30px;
+}
+
+.footer button i:hover {
+    font-size: 40px;
 }
