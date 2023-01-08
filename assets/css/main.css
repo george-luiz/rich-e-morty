@@ -16,6 +16,10 @@
     padding: 20px 0;
 }
 
+.main a {
+    text-decoration: none;
+}
+
 .card {
     background-color: #3c3e44;
     display: flex;
@@ -54,6 +58,10 @@
     font-size: 18px;
     font-weight: bold;
     color: white;
+}
+
+.card__container__description-img {
+    color: red;
 }
 
 .card__title-secondary {
@@ -96,6 +104,11 @@
     color: white;
 }
 
+.botoes__container button i:hover {
+    font-size: 40px;
+    color: #3c3e44;
+}
+
 
 @media screen and (max-width: 350px) {
     .card {
@@ -123,7 +136,7 @@
 
     .img-personagem {
         width: 250px;
-        height: 200px;
+        height: 100%;
         object-fit: fill;
         border-radius: 10px 0 0 10px;
     }
