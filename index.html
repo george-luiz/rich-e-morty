@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Rick and Morty API</title>
-    <link rel="icon" type="image/png" href="assets/img/rich-e-morty.png"/>
+    <link rel="icon" type="image/png" href="assets/img/rich-e-morty.png" />
 
     <!--Reset-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
@@ -35,12 +35,18 @@
 <body>
     <div class="body">
         <header class="header">
-            <a href="https://rickandmortyapi.com/documentation"><h1>The Rick and Morty API</h1></a>
+            <a href="https://rickandmortyapi.com/documentation">
+                <h1>The Rick and Morty API</h1>
+            </a>
         </header>
 
         <main>
+            <section class="container-searc">
+                <input type="text" placeholder="Morty Smith" class="searc" id="searc">
+                <span id="error"></span>
+            </section>
             <div class="main" id="main">
-                
+
             </div>
             <div class="botoes">
                 <div class="botoes__container">

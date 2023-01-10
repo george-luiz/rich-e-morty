@@ -1,21 +1,26 @@
-const baseUrl = "https://rickandmortyapi.com/api/character/?page=1";
+const baseUrl = "https://rickandmortyapi.com/api/character/";
+let searc = document.getElementById("searc");
+let error = document.getElementById("error");
 let corpo = document.getElementById("main");
 let next = document.getElementById("btnNext");
 let numeroPagina = document.getElementById("number-page");
 let prev = document.getElementById("btnPrev");
-let valor = 1;
+let pageAtual = 1;
 
-async function buscandoDados(valor) {
-  let resposta = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${valor}`
-  );
-  let respostaTransformada = await resposta.json();
+async function buscandoDados(parametro, page) {
+  try {
+    const resposta = await fetch(`${baseUrl}?${parametro}=${page}`);
+    const respostaConvertida = await resposta.json();
 
-  return colocandoDados(respostaTransformada);
+    return colocandoDados(respostaConvertida);
+  } catch (e) {
+    error.innerHTML = "Não encontrado este nome, Tente novamente."
+
+  }
 }
 
-function colocandoDados(respostaTransformada) {
-  respostaTransformada.results.map((element) => {
+function colocandoDados(respostaConvertida) {
+  respostaConvertida.results.map((element) => {
     const id = element.id;
     const imagem = element.image;
     const nome = element.name;
@@ -24,7 +29,20 @@ function colocandoDados(respostaTransformada) {
     const localizacao = element.location.name;
     const genero = element.gender;
 
-    return (corpo.innerHTML += `
+    return constroiCard(
+      id,
+      imagem,
+      nome,
+      status,
+      especies,
+      localizacao,
+      genero
+    );
+  });
+}
+
+function constroiCard(id, imagem, nome, status, especies, localizacao, genero) {
+  return (corpo.innerHTML += `
             <a href="character.html?id=${id}">
                 <section class="card">
                     <img src="${imagem}" alt="personagem"
@@ -34,12 +52,12 @@ function colocandoDados(respostaTransformada) {
                             <h3 class="card__container__description-title">${nome}</h3>
                             <section class="card__container__description-img">
                                 ${
-                                status === "Alive"
+                                  status === "Alive"
                                     ? `<i class="fa-solid fa-heart"></i>`
                                     : `<i class="fa-regular fa-heart"></i>`
                                 } 
                                 <span class="paragraph">${
-                                status === "unknown" ? "Desconhecido" : status
+                                  status === "unknown" ? "Desconhecido" : status
                                 } - ${especies}</span>
                             </section>
                         </div>
@@ -54,34 +72,45 @@ function colocandoDados(respostaTransformada) {
                     </div>
                  </section>
             </a>
-        `);
-  });
+          `);
 }
 
-let incremento = 1;
-
 next.addEventListener("click", () => {
-  corpo.innerHTML = "";
-  valor++;
-  incremento = valor;
-  numeroPagina.innerHTML = incremento;
-
-  console.log(incremento);
-  buscandoDados(incremento);
+  nextPage();
 });
 
 prev.addEventListener("click", () => {
-  if (valor > 1) {
-    corpo.innerHTML = "";
-    valor--;
-    let decremento = valor;
-    numeroPagina.innerHTML = decremento;
-
-    console.log(decremento);
-    buscandoDados(decremento);
-  } else {
-    console.log("valor menor ou igual a 1", valor);
-  }
+  prevPage();
 });
 
-buscandoDados(valor);
+searc.addEventListener("blur", (e) => {
+  let valorDigitado = e.target.value;
+  error.innerHTML = "";
+  corpo.innerHTML = "";
+  buscandoDados("name", valorDigitado);
+});
+
+function nextPage() {
+  let incremento = 1;
+  error.innerHTML = "";
+  corpo.innerHTML = "";
+  pageAtual++;
+  incremento = pageAtual;
+  numeroPagina.innerHTML = incremento;
+  buscandoDados("page", incremento);
+}
+
+function prevPage() {
+  if (pageAtual > 1) {
+    error.innerHTML = "";
+    corpo.innerHTML = "";
+    pageAtual--;
+    let decremento = pageAtual;
+    numeroPagina.innerHTML = decremento;
+
+    buscandoDados("page", decremento);
+  } else {
+  }
+}
+
+buscandoDados(pageAtual);

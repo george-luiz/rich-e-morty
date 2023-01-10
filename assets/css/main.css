@@ -6,6 +6,35 @@
     height: 100vh;
 }
 
+.container-searc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #272b33;
+    align-items: center;
+}
+
+.container-searc input {
+    padding: 5px;
+    width: 400px;
+    text-align: center;
+    color: #272b33;
+    font-size: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border-color: black;
+}
+
+::-webkit-input-placeholder { /* Ter acesso ao placeholder */
+    color: #272b33;
+    font-size: 20px;
+}
+
+.container-searc {
+    color: red;
+}
+
 
 .main {
     background-color: #272b33;
